@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sadguru-krupa-network
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: SKN_HOST
+        value: 0.0.0.0
+      - key: SKN_UPI_ID
+        value: chowkekarnitin@okaxis
+      - key: SKN_ADMIN_TOKEN
+        generateValue: true

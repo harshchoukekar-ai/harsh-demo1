@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Booking admin | Sadguru Krupa Network</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; color: #17231d; background: #f6f7f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(1120px, calc(100% - 32px)); margin: 48px auto; }
+    h1 { margin: 0 0 8px; letter-spacing: -.04em; }
+    p { color: #647168; line-height: 1.6; }
+    .panel, .booking { margin-top: 20px; padding: 22px; border: 1px solid #e4e9e1; border-radius: 18px; background: #fff; }
+    form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+    label { display: grid; flex: 1 1 280px; gap: 7px; font-size: 13px; font-weight: 700; }
+    input, select, button { min-height: 42px; padding: 9px 11px; border: 1px solid #dfe5dc; border-radius: 9px; background: #fff; color: inherit; font: inherit; }
+    button { border: 0; color: #fff; background: #176b48; font-weight: 700; cursor: pointer; }
+    .booking h2 { margin: 0 0 10px; font-size: 18px; }
+    .details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 9px 20px; font-size: 14px; }
+    .details p { margin: 4px 0; overflow-wrap: anywhere; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .controls label { flex: 1 1 180px; }
+    #message { min-height: 24px; }
+    @media (max-width: 600px) { main { margin-top: 25px; } .panel, .booking { padding: 17px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Booking admin</h1>
+    <p>Review visit requests and manually update booking and payment status. UPI payments are not automatically verified.</p>
+    <section class="panel">
+      <form id="login-form">
+        <label for="admin-token">Admin access token
+          <input id="admin-token" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Sign in and load bookings</button>
+      </form>
+      <p id="message" role="status" aria-live="polite"></p>
+    </section>
+    <section id="bookings" aria-live="polite"></section>
+  </main>
+  <script>
+    const loginForm = document.getElementById("login-form");
+    const message = document.getElementById("message");
+    const bookingsSection = document.getElementById("bookings");
+    let adminToken = "";
+
+    function addText(parent, tag, text, className) {
+      const element = document.createElement(tag);
+      element.textContent = text;
+      if (className) element.className = className;
+      parent.append(element);
+      return element;
+    }
+
+    async function request(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+          ...(options.headers || {})
+        }
+      });
+      const responseText = await response.text();
+      let result;
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        throw new Error("The server returned an invalid response. Please try again.");
+      }
+      if (!response.ok) throw new Error(result.error || "Request failed.");
+      return result;
+    }
+
+    function selectControl(labelText, value, options) {
+      const label = document.createElement("label");
+      label.append(document.createTextNode(labelText));
+      const select = document.createElement("select");
+      for (const [optionValue, optionLabel] of options) {
+        const option = document.createElement("option");
+        option.value = optionValue;
+        option.textContent = optionLabel;
+        option.selected = value === optionValue;
+        select.append(option);
+      }
+      label.append(select);
+      return { label, select };
+    }
+
+    function renderBooking(booking) {
+      const article = document.createElement("article");
+      article.className = "booking";
+      addText(article, "h2", `${booking.reference} · ${booking.name}`);
+      const details = document.createElement("div");
+      details.className = "details";
+      for (const [label, value] of [
+        ["Email", booking.email],
+        ["Phone", booking.phone],
+        ["Service address", booking.address],
+        ["Preferred visit", booking.preferred_datetime],
+        ["Request details", booking.details || "None"],
+        ["Received (UTC)", booking.created_at]
+      ]) {
+        addText(details, "p", `${label}: ${value}`);
+      }
+      article.append(details);
+
+      const controls = document.createElement("div");
+      controls.className = "controls";
+      const bookingStatus = selectControl("Booking status", booking.status, [
+        ["requested", "Requested"],
+        ["confirmed", "Confirmed"],
+        ["declined", "Declined"],
+        ["completed", "Completed"]
+      ]);
+      const paymentStatus = selectControl("Payment status", booking.payment_status, [
+        ["not_paid", "Not paid"],
+        ["verification_pending", "Verification pending"],
+        ["paid", "Paid (manually verified)"]
+      ]);
+      const save = document.createElement("button");
+      save.type = "button";
+      save.textContent = "Save status";
+      save.addEventListener("click", async () => {
+        save.disabled = true;
+        try {
+          await request(`/api/admin/bookings/${encodeURIComponent(booking.id)}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              status: bookingStatus.select.value,
+              payment_status: paymentStatus.select.value
+            })
+          });
+          message.textContent = `Updated ${booking.reference}.`;
+          await loadBookings();
+        } catch (error) {
+          message.textContent = error.message;
+        } finally {
+          save.disabled = false;
+        }
+      });
+      controls.append(bookingStatus.label, paymentStatus.label, save);
+      article.append(controls);
+      return article;
+    }
+
+    async function loadBookings() {
+      const result = await request("/api/admin/bookings");
+      bookingsSection.replaceChildren();
+      if (result.bookings.length === 0) {
+        addText(bookingsSection, "p", "No visit requests yet.");
+        return;
+      }
+      for (const booking of result.bookings) bookingsSection.append(renderBooking(booking));
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      adminToken = document.getElementById("admin-token").value;
+      message.textContent = "Loading bookings...";
+      try {
+        await loadBookings();
+        message.textContent = "Bookings loaded. Sign out by closing this tab.";
+      } catch (error) {
+        adminToken = "";
+        bookingsSection.replaceChildren();
+        message.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <meta name="description" content="Contact Sadguru Krupa Network for WiFi installation, network setup, and technical support.">
+  <title>Sadguru Krupa Network | WiFi &amp; Network Services</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17231d;
+      --muted: #647168;
+      --green: #176b48;
+      --green-dark: #10583a;
+      --lime: #d7ef86;
+      --paper: #f6f7f2;
+      --white: #fff;
+      --line: #e4e9e1;
+      --radius: 22px;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    .topbar {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(23, 35, 29, .07);
+      background: rgba(246, 247, 242, .92);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -.03em; }
+    .brand-mark {
+      display: grid; width: 42px; height: 42px; place-items: center; border-radius: 14px;
+      color: var(--white); background: var(--green);
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .brand small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #48554c; font-size: 14px; font-weight: 600; }
+    .nav-links a:hover { color: var(--green); }
+    .button {
+      display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 9px;
+      padding: 0 19px; border: 0; border-radius: 999px; background: var(--green); color: var(--white);
+      font: inherit; font-size: 14px; font-weight: 700; transition: background .2s, transform .2s;
+    }
+    .button:hover { background: var(--green-dark); transform: translateY(-2px); }
+    .button svg { width: 17px; height: 17px; }
+    .button-light { color: var(--ink); background: var(--white); }
+    .button-light:hover { color: var(--white); }
+
+    .hero { padding: 76px 0 72px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 55px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #dfe8dc;
+      border-radius: 999px; color: var(--green); background: #fff; font-size: 12px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #77b846; }
+    h1 { max-width: 620px; margin: 20px 0 18px; font-size: clamp(42px, 6vw, 68px); line-height: 1.06; letter-spacing: -.065em; }
+    h1 em { color: var(--green); font-style: normal; }
+    .hero-copy { max-width: 520px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 26px; color: var(--muted); font-size: 13px; }
+    .avatars { display: flex; }
+    .avatars span { display: grid; width: 29px; height: 29px; place-items: center; margin-left: -7px; border: 2px solid var(--paper); border-radius: 50%; color: var(--green-dark); background: var(--lime); font-size: 10px; font-weight: 800; }
+    .avatars span:first-child { margin-left: 0; background: #c9e8d2; }
+    .avatars span:last-child { background: #f4d8a8; }
+
+    .visual { position: relative; min-height: 430px; display: grid; place-items: center; }
+    .visual::before, .visual::after { position: absolute; content: ""; border: 1px solid #dfe8d9; border-radius: 50%; }
+    .visual::before { width: 370px; height: 370px; }
+    .visual::after { width: 290px; height: 290px; }
+    .wifi-card {
+      position: relative; z-index: 1; width: min(310px, 80%); padding: 25px; border: 1px solid rgba(255,255,255,.75);
+      border-radius: 28px; background: linear-gradient(145deg, #fff, #f1f7ed); box-shadow: 0 25px 70px rgba(29, 68, 42, .12);
+      transform: rotate(-3deg);
+    }
+    .wifi-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .wifi-icon { display: grid; width: 50px; height: 50px; place-items: center; border-radius: 17px; color: var(--green); background: #e5f2d9; }
+    .wifi-icon svg { width: 28px; height: 28px; }
+    .online { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-size: 11px; font-weight: 750; }
+    .online::before { width: 7px; height: 7px; border-radius: 50%; background: #6cb84e; content: ""; }
+    .wifi-card h2 { margin: 25px 0 5px; font-size: 22px; letter-spacing: -.04em; }
+    .wifi-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .signal { display: flex; height: 94px; align-items: end; gap: 7px; margin: 24px 0 19px; }
+    .signal i { flex: 1; border-radius: 7px 7px 3px 3px; background: linear-gradient(0deg, #80bd58, #cce793); }
+    .signal i:nth-child(1) { height: 31%; opacity: .48; }
+    .signal i:nth-child(2) { height: 48%; opacity: .62; }
+    .signal i:nth-child(3) { height: 65%; opacity: .76; }
+    .signal i:nth-child(4) { height: 82%; opacity: .9; }
+    .signal i:nth-child(5) { height: 100%; }
+    .card-footer { display: flex; justify-content: space-between; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .float-tag { position: absolute; z-index: 2; display: flex; align-items: center; gap: 9px; padding: 12px 15px; border: 1px solid #edf0e9; border-radius: 15px; background: var(--white); box-shadow: 0 12px 34px rgba(29, 68, 42, .1); font-size: 12px; font-weight: 700; }
+    .float-tag svg { width: 18px; height: 18px; color: var(--green); }
+    .float-tag.one { top: 74px; right: 0; }
+    .float-tag.two { bottom: 76px; left: 0; }
+
+    .services { padding: 78px 0 84px; background: var(--white); }
+    .section-heading { max-width: 620px; margin-bottom: 34px; }
+    .section-heading .eyebrow { background: var(--paper); }
+    h2.section-title { margin: 16px 0 10px; font-size: clamp(30px, 4vw, 43px); letter-spacing: -.055em; line-height: 1.13; }
+    .section-heading p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; transition: border-color .2s, transform .2s; }
+    .service-card:hover { border-color: #b6d2b5; transform: translateY(-4px); }
+    .service-icon { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 15px; color: var(--green); background: #edf5e6; }
+    .service-icon svg { width: 23px; height: 23px; }
+    .service-card h3 { margin: 20px 0 8px; font-size: 18px; letter-spacing: -.03em; }
+    .service-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    .about { padding: 78px 0; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 70px; }
+    .about-panel { position: relative; min-height: 310px; display: grid; place-items: center; overflow: hidden; border-radius: 28px; background: var(--green); }
+    .about-panel::before, .about-panel::after { position: absolute; width: 280px; height: 280px; border: 1px solid rgba(255,255,255,.19); border-radius: 50%; content: ""; }
+    .about-panel::after { width: 210px; height: 210px; }
+    .about-emblem { position: relative; z-index: 1; color: var(--lime); }
+    .about-emblem svg { width: 95px; height: 95px; }
+    .about-copy h2 { margin: 15px 0 14px; font-size: clamp(30px, 4vw, 42px); letter-spacing: -.055em; line-height: 1.12; }
+    .about-copy p { margin: 0; color: var(--muted); line-height: 1.8; }
+    .check-list { display: grid; gap: 13px; margin: 23px 0 0; padding: 0; list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 650; }
+    .check-list svg { width: 18px; height: 18px; flex: 0 0 auto; color: var(--green); }
+
+    .booking { padding: 78px 0; background: #eef3e9; }
+    .booking-grid { display: grid; grid-template-columns: .8fr 1.2fr; align-items: start; gap: 48px; }
+    .booking-copy h2 { margin: 16px 0 12px; font-size: clamp(30px, 4vw, 42px); letter-spacing: -.055em; line-height: 1.12; }
+    .booking-copy p { margin: 0; color: var(--muted); line-height: 1.75; }
+    .booking-form, .payment-panel { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 13px; font-weight: 700; }
+    .field input, .field textarea { width: 100%; min-height: 46px; padding: 11px 12px; border: 1px solid #dfe5dc; border-radius: 10px; color: var(--ink); background: #fff; font: inherit; font-size: 14px; }
+    .field textarea { min-height: 90px; resize: vertical; }
+    .field input:focus, .field textarea:focus { border-color: var(--green); outline: 3px solid rgba(23, 107, 72, .12); }
+    .form-help { margin: 15px 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .form-submit { width: 100%; cursor: pointer; }
+    .form-message { margin: 14px 0 0; color: var(--green-dark); font-size: 14px; line-height: 1.6; }
+    .form-message.error { color: #a52c2c; }
+    .payment-panel { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; margin-top: 20px; }
+    .payment-panel[hidden] { display: none; }
+    .payment-panel h3 { margin: 0 0 8px; font-size: 18px; }
+    .payment-panel p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .payment-qr { width: 144px; height: 144px; padding: 8px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .payment-qr img { width: 100%; height: 100%; }
+    .payment-link { display: inline-block; margin-top: 12px; color: var(--green); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+    .contact { padding: 0 0 78px; }
+    .contact-box { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 37px 42px; border-radius: 26px; color: var(--white); background: var(--green); }
+    .contact-box h2 { margin: 0 0 8px; font-size: clamp(25px, 3.5vw, 36px); letter-spacing: -.05em; }
+    .contact-box p { margin: 0; color: rgba(255,255,255,.76); font-size: 14px; line-height: 1.65; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact-box .button { white-space: nowrap; }
+    .contact-box .button-light:hover { background: #e5f2d9; color: var(--ink); }
+    footer { padding: 23px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--muted); font-size: 12px; }
+    .footer-inner strong { color: var(--ink); }
+
+    @media (max-width: 800px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 15px; }
+      .hero { padding-top: 55px; }
+      .visual { min-height: 380px; }
+      .about-grid { grid-template-columns: 1fr; gap: 34px; }
+      .about-panel { min-height: 250px; }
+      .booking-grid { grid-template-columns: 1fr; gap: 28px; }
+      .contact-box { align-items: flex-start; flex-direction: column; padding: 30px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 32px, 480px); }
+      .topbar { padding: 13px 0; }
+      .nav-links { display: none; }
+      .nav > .button { min-height: 42px; padding: 0 14px; font-size: 12px; }
+      .hero { padding: 43px 0 48px; }
+      h1 { font-size: 47px; }
+      .hero-copy { font-size: 15px; }
+      .visual { min-height: 340px; margin-inline: -10px; }
+      .visual::before { width: 310px; height: 310px; }
+      .visual::after { width: 245px; height: 245px; }
+      .float-tag.one { top: 43px; right: 3px; }
+      .float-tag.two { bottom: 49px; left: 1px; }
+      .services, .about { padding: 58px 0; }
+      .booking { padding: 58px 0; }
+      .booking-form, .payment-panel { padding: 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .payment-panel { grid-template-columns: 1fr; }
+      .payment-qr { width: 160px; height: 160px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 21px; }
+      .contact { padding-bottom: 58px; }
+      .contact-box { padding: 26px 22px; }
+      .contact-actions { width: 100%; }
+      .contact-actions .button { flex: 1; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Sadguru Krupa Network home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M5 9a11 11 0 0 1 14 0M8 12a6.5 6.5 0 0 1 8 0m-5 3a2 2 0 0 1 2 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span>Sadguru Krupa Network<small>WiFi & Network Services</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="button" href="tel:+919823465969">Call us</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow"><span></span> Your trusted network partner</span>
+          <h1>Better connections, <em>in every corner.</em></h1>
+          <p class="hero-copy">Need help setting up WiFi or a network for your home or business? Talk to Sadguru Krupa Network for practical advice and support tailored to your needs.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://wa.me/919823465969?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20your%20WiFi%20and%20network%20services." target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.4 8.4 0 0 1-12.4 7.4L4 20l1.1-3.4A8.4 8.4 0 1 1 20 11.5Z"/><path d="M8.5 8.5c.3 2.4 2.6 4.7 5 5"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a class="button button-light" href="#services">Explore services</a>
+          </div>
+          <div class="hero-note">
+            <span class="avatars" aria-hidden="true"><span>SK</span><span>Wi</span><span>+</span></span>
+            <span>Personal service. Clear advice. The right solution.</span>
+          </div>
+        </div>
+        <div class="visual" aria-label="WiFi connection illustration">
+          <div class="float-tag one">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 10a12 12 0 0 1 16 0M7 13a7.5 7.5 0 0 1 10 0m-7 3a3 3 0 0 1 4 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+            Smart WiFi setup
+          </div>
+          <div class="wifi-card">
+            <div class="wifi-card-top">
+              <span class="wifi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9a14 14 0 0 1 18 0M6 12a9 9 0 0 1 12 0m-9 3a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+              </span>
+              <span class="online">Connection ready</span>
+            </div>
+            <h2>Connected, simply.</h2>
+            <p>Network support tailored to your needs</p>
+            <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="card-footer"><span>Sadguru Krupa Network</span><span>● WiFi</span></div>
+          </div>
+          <div class="float-tag two">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.3 8 10 4.6-1.7 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            Support when you need it
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">Our services</span>
+          <h2 class="section-title">Make your network simple and reliable.</h2>
+          <p>From setup to troubleshooting, tell us what you need and we’ll help you find the right next step.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9a14 14 0 0 1 18 0M6 12a9 9 0 0 1 12 0m-9 3a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg></span>
+            <h3>WiFi installation</h3>
+            <p>WiFi setup and router placement support for your home or office.</p>
+          </article>
+          <article class="service-card">
+            <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4M7 10h3m4 0h3m-10 3h10"/></svg></span>
+            <h3>Network setup</h3>
+            <p>Help connecting your devices and planning a network for your space.</p>
+          </article>
+          <article class="service-card">
+            <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2m4-11v5m-2.5-2.5h5"/></svg></span>
+            <h3>Technical support</h3>
+            <p>Having connection issues or slow WiFi? Get in touch for troubleshooting support.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap about-grid">
+        <div class="about-panel" aria-hidden="true">
+          <span class="about-emblem"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 38a56 56 0 0 1 76 0M24 51a38 38 0 0 1 52 0M37 64a19 19 0 0 1 26 0"/><circle cx="50" cy="78" r="3" fill="currentColor" stroke="none"/></svg></span>
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow">Sadguru Krupa Network</span>
+          <h2>A better network, without the confusion.</h2>
+          <p>Every space and every customer has different needs. We start by understanding yours, then discuss a practical WiFi or network solution.</p>
+          <ul class="check-list">
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Advice tailored to your requirements</li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Direct phone or WhatsApp support</li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Help with home and business networks</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="wrap booking-grid">
+        <div class="booking-copy">
+          <span class="eyebrow">Book a technician visit</span>
+          <h2>Tell us when and where you need help.</h2>
+          <p>Send a visit request and we’ll contact you to confirm availability and the service charge. Your appointment is not confirmed until we contact you.</p>
+        </div>
+        <div>
+          <form class="booking-form" id="booking-form">
+            <div class="form-grid">
+              <div class="field">
+                <label for="customer-name">Full name</label>
+                <input id="customer-name" name="name" autocomplete="name" maxlength="100" required>
+              </div>
+              <div class="field">
+                <label for="customer-email">Email address</label>
+                <input id="customer-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+              </div>
+              <div class="field">
+                <label for="customer-phone">Phone number</label>
+                <input id="customer-phone" name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="+91 98765 43210" required>
+              </div>
+              <div class="field">
+                <label for="visit-time">Preferred visit date and time</label>
+                <input id="visit-time" name="preferred_datetime" type="datetime-local" required>
+              </div>
+              <div class="field full">
+                <label for="visit-address">Service address</label>
+                <input id="visit-address" name="address" autocomplete="street-address" maxlength="300" required>
+              </div>
+              <div class="field full">
+                <label for="visit-details">What do you need help with? (optional)</label>
+                <textarea id="visit-details" name="details" maxlength="1000" placeholder="Briefly describe your WiFi or network issue."></textarea>
+              </div>
+            </div>
+            <p class="form-help">We only use these details to respond to your visit request. Do not send Aadhaar, identity documents, passwords, or payment PINs.</p>
+            <button class="button form-submit" type="submit">Request a visit</button>
+            <p class="form-message" id="booking-message" role="status" aria-live="polite"></p>
+          </form>
+          <div class="payment-panel" id="payment-panel" hidden>
+            <div>
+              <h3>Pay by UPI after we confirm the charge</h3>
+              <p>Your request is not a confirmed appointment or a confirmed payment. Scan this QR with a UPI app only after Sadguru Krupa Network confirms the visit and amount. Payments are verified manually.</p>
+              <a class="payment-link" id="upi-link" href="#">Open in a UPI app</a>
+            </div>
+            <div class="payment-qr"><img id="upi-qr" alt="UPI payment QR code for Sadguru Krupa Network"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-box">
+        <div>
+          <h2>Ready to improve your network?</h2>
+          <p>Tell us what you need. Give us a call or send a message on WhatsApp.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button-light" href="tel:+919823465969">Call: 98234 65969</a>
+          <a class="button" style="background:#0d4931" href="https://wa.me/919823465969?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20your%20WiFi%20and%20network%20services." target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span><strong>Sadguru Krupa Network</strong> · WiFi & Network Services</span>
+      <span>Call us: <a href="tel:+919823465969">98234 65969</a></span>
+    </div>
+  </footer>
+  <script>
+    const bookingForm = document.getElementById("booking-form");
+    const bookingMessage = document.getElementById("booking-message");
+    const paymentPanel = document.getElementById("payment-panel");
+    const upiLink = document.getElementById("upi-link");
+    const upiQr = document.getElementById("upi-qr");
+
+    bookingForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      bookingMessage.classList.remove("error");
+      bookingMessage.textContent = "Sending your visit request...";
+      paymentPanel.hidden = true;
+      const submitButton = bookingForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+
+      try {
+        const values = Object.fromEntries(new FormData(bookingForm).entries());
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values)
+        });
+        const responseText = await response.text();
+        let result;
+        try {
+          result = responseText ? JSON.parse(responseText) : {};
+        } catch {
+          throw new Error("The server returned an invalid response. Please try again or call us.");
+        }
+        if (!response.ok) throw new Error(result.error || "We couldn't send your request. Please try again.");
+        if (!result.reference || !result.payment_qr_url || !result.upi_url) {
+          throw new Error("The server response is incomplete. Please call us to confirm your request.");
+        }
+
+        bookingMessage.textContent = `Request received. Your reference is ${result.reference}. We'll contact you to confirm the visit and charge.`;
+        paymentPanel.hidden = false;
+        upiQr.src = result.payment_qr_url;
+        upiLink.href = result.upi_url;
+        bookingForm.reset();
+      } catch (error) {
+        bookingMessage.classList.add("error");
+        bookingMessage.textContent = error.message || "Unable to connect. Please call us instead.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
